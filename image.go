@@ -3,25 +3,11 @@ package main
 import (
 	"fmt"
 	"github.com/disintegration/imaging"
-	"time"
 )
 
-func main() {
-	Path := "/Users/developer/Downloads/"
-	originalPath := Path + ""
-	savePath := Path + ""
-	ImageCutSquare(60, originalPath, savePath)
-
-}
-
-func apiSpeedLimiter(count float64) {
-	speed := 1 / count
-
-	fmt.Println("speed:")
-	fmt.Println(speed)
-	time.Sleep(time.Duration(speed) * time.Second)
-}
-func imageCutSquare(sidelength int, originalPath, savePath string) {
+// ImageCutSquare
+// 处理图片,把originalPath的图片裁剪成边长side_length大小,保存到savePath
+func ImageCutSquare(sidelength int, originalPath, savePath string) {
 	// 1. 打开图片
 	src, err := imaging.Open(originalPath)
 	if err != nil {
