@@ -22,5 +22,4 @@ func ImageCutSquare(sidelength int, originalPath, savePath string) {
 	if err != nil {
 		fmt.Println("保存图片失败")
 	}
-
 }
