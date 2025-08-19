@@ -1,4 +1,4 @@
-package main
+package fomat
 
 import (
 	"encoding/json"
@@ -22,8 +22,7 @@ func (c *Color) ColorPrint() string {
 	return "ColorPrint"
 }
 
-// 用于测试，推送时记得注释掉，不然影响日志
-func JsonFormat(jsonStr interface{}) {
+func JsonFormat(jsonStr any) {
 
 	// 使用 MarshalIndent 格式化 JSON 输出
 	prettyJSON, err := json.MarshalIndent(jsonStr, "", "    ")
@@ -32,19 +31,21 @@ func JsonFormat(jsonStr interface{}) {
 	}
 	// 输出格式化后的 JSON
 	lines := strings.Split(string(prettyJSON), "\n")
-	PrintColor("JsonFormat", "zise", "---------------------------------------------------------")
+	//分割线
+	s := PrintColor("JsonFormat", "laanse", "----------------------------------------------------------------------------")
+	jsonString := s
 
 	for _, line := range lines {
-		PrintColor(line, "lianghuangse", "")
+		jsonString += PrintColor(line, "BrightYellow", "")
 	}
-	PrintColor("JsonFormat", "zise", "---------------------------------------------------------")
-
+	jsonString += s
+	fmt.Println(jsonString)
 	//PrintColor(string(prettyJSON), "红色")
 
 }
 
-// 用于测试，推送时记得注释掉，不然影响日志
-func PrintColor(a interface{}, color string, Separator string) {
+// 用Separator包起来的color颜色返回a,例如(xxx, "red", "==")返回"==\033[31mxxx\033[0m==\n"
+func PrintColor(a, color, Separator string) string {
 	wordcolor := "\033[37m"
 	switch color {
 	case "black", "heise", "黑", "黑色", "Black":
@@ -86,6 +87,6 @@ func PrintColor(a interface{}, color string, Separator string) {
 	if fmt.Sprintf(" %T", a) == "string" {
 	}
 	Separator = "\033[95m" + Separator + "\033[0m"
-	// 打印带颜色的文本
-	fmt.Println(Separator + wordcolor + fmt.Sprint(a) + "\033[0m" + Separator)
+	// 返回带颜色的文本
+	return fmt.Sprint(Separator + wordcolor + fmt.Sprint(a) + "\033[0m" + Separator + "\n")
 }

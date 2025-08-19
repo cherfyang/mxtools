@@ -1,4 +1,4 @@
-package main
+package fomat
 
 func GetFormat(model string) Format {
 	switch model {
